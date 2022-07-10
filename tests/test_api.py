@@ -37,7 +37,7 @@ class ApiTest(unittest.TestCase):
         assert token_key not in self.api.public_stream_client.headers._store
 
     def test_resolves_string(self):
-        _id = self.api.parse_track_uri("soundcloud:song.38720262")
+        _id = self.api.get_uri_id("soundcloud:song.38720262")
         assert _id == "38720262"
 
     @my_vcr.use_cassette("sc-login-error.yaml")
@@ -61,7 +61,7 @@ class ApiTest(unittest.TestCase):
         trackc["uri"] = "soundcloud:song.38720262"
         track = Track(**trackc)
 
-        id = self.api.parse_track_uri(track)
+        id = self.api.get_uri_id(track)
         assert id == "38720262"
 
     @my_vcr.use_cassette("sc-resolve-track-none.yaml")
