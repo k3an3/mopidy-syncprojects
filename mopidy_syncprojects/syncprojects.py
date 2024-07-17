@@ -1,16 +1,17 @@
 import datetime
 import logging
 import re
-import requests
 import string
+from contextlib import closing
+from urllib.parse import quote_plus
+
+import requests
 import time
 import unicodedata
-from contextlib import closing
 from mopidy import httpclient
 from mopidy.models import Album, Artist, Track
 from requests.adapters import HTTPAdapter
 from requests.exceptions import HTTPError
-from urllib.parse import quote_plus
 
 import mopidy_syncprojects
 
@@ -302,6 +303,7 @@ class SyncprojectsClient:
         album_kwargs = {}
 
         track_kwargs["name"] = song["name"]
+        track_kwargs["length"] = song["duration"] * 1000.0
         if song["album_order"] is not None:
             track_kwargs["track_no"] = song["album_order"]
         artist_kwargs["name"] = project["name"]
