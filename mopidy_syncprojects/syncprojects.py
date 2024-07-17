@@ -303,7 +303,7 @@ class SyncprojectsClient:
         album_kwargs = {}
 
         track_kwargs["name"] = song["name"]
-        track_kwargs["length"] = song["duration"] * 1000.0
+        track_kwargs["length"] = song["duration"] * 1000
         if song["album_order"] is not None:
             track_kwargs["track_no"] = song["album_order"]
         artist_kwargs["name"] = project["name"]
